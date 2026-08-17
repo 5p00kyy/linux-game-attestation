@@ -1,0 +1,28 @@
+{
+  / iss / 1: "https://verifier.example.invalid",
+  / aud / 3: "https://game.example.invalid",
+  / exp / 4: 1800000060,
+  / iat / 6: 1800000001,
+  / cti / 7: h'0102030405060708090a0b0c0d0e0f10',
+  / cnf / 8: {
+    / COSE Key thumbprint / 5:
+      h'1111111111111111111111111111111111111111111111111111111111111111'
+  },
+  / EAT nonce / 10:
+    h'2222222222222222222222222222222222222222222222222222222222222222',
+  / EAT profile / 265:
+    "https://github.com/5p00kyy/linux-game-attestation/profile/0.1",
+  / LGA private claims / -70000: {
+    / challenge ID / 1: h'33333333333333333333333333333333',
+    / application ID / 2: "org.example.synthetic-game",
+    / session ID / 3: h'44444444444444444444444444444444',
+    / policy ID / 4: "lga.example.virtual.1",
+    / policy version / 5: 1,
+    / policy digest / 6:
+      h'5555555555555555555555555555555555555555555555555555555555555555',
+    / workload manifest digest / 7:
+      h'6666666666666666666666666666666666666666666666666666666666666666',
+    / virtual assurance / 8: 1,
+    / revocation epoch / 9: 0
+  }
+}

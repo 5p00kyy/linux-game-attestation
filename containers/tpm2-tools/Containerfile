@@ -1,0 +1,13 @@
+FROM docker.io/library/debian@sha256:9008de19fcf0f476fd2e6b43e16c33332afac4e9d7b95d8ae032e5fb4dead37a
+
+RUN apt-get update \
+    && apt-get install --yes --no-install-recommends \
+        ca-certificates \
+        libtss2-tcti-swtpm0 \
+        tpm2-tools \
+    && rm -rf /var/lib/apt/lists/*
+
+COPY lab/vtpm/quote-in-container.sh /usr/local/bin/lga-quote-smoke
+
+WORKDIR /work
+ENTRYPOINT []

@@ -1,0 +1,21 @@
+; Minimal reference-policy document for profile development.
+; This is a verifier-owner input, not an EAT claim set.
+
+lga-policy = {
+  1 => non-empty-tstr,                 ; policy ID
+  2 => uint,                           ; policy version
+  3 => uint,                           ; valid from
+  4 => uint,                           ; valid until, exclusive
+  5 => 0..3,                           ; maximum assurance this policy can issue
+  6 => uint,                           ; revocation epoch
+  7 => [1* digest],                    ; accepted platform manifests
+  8 => [1* digest],                    ; accepted workload manifests
+  ? 9 => [* non-empty-tstr]            ; human-readable constraints
+}
+
+digest = [
+  algorithm: 1,                        ; SHA-256 for profile 0.1
+  value: bstr .size 32
+]
+
+non-empty-tstr = tstr .size (1..256)

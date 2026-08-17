@@ -1,0 +1,7 @@
+.state/
+target/
+__pycache__/
+*.py[cod]
+.venv/
+dist/
+build/

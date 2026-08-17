@@ -1,0 +1,3 @@
+# Common files export variables to callers, traps are invoked indirectly, and
+# CDPATH= cd intentionally clears CDPATH for one command.
+disable=SC1007,SC2034,SC2317

@@ -1,0 +1,9 @@
+[Unit]
+Description=Generate ephemeral SSH host key for the LGA image
+ConditionPathExists=!/var/lib/lga-ssh/ssh_host_ed25519_key
+
+[Service]
+Type=oneshot
+StateDirectory=lga-ssh
+StateDirectoryMode=0700
+ExecStart=/usr/bin/ssh-keygen -q -t ed25519 -N "" -f /var/lib/lga-ssh/ssh_host_ed25519_key

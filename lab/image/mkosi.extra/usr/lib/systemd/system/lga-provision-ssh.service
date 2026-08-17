@@ -1,0 +1,10 @@
+[Unit]
+Description=Provision the LGA SSH key from the CIDATA drive
+Requires=home.mount
+After=home.mount
+Before=sshd.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/libexec/lga-provision-ssh
+RemainAfterExit=yes

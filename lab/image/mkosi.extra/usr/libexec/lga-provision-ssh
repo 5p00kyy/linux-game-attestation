@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+seed=/dev/disk/by-label/CIDATA
+mountpoint=/run/lga-seed
+
+for _ in {1..30}; do
+    [[ -e $seed ]] && break
+    sleep 1
+done
+[[ -e $seed ]] || { printf 'CIDATA drive not found\n' >&2; exit 1; }
+
+install -d -m 0700 "$mountpoint"
+mount -t iso9660 -o ro "$seed" "$mountpoint"
+trap 'umount "$mountpoint"' EXIT
+
+[[ -s $mountpoint/authorized_keys ]] || {
+    printf 'CIDATA authorized_keys is missing or empty\n' >&2
+    exit 1
+}
+install -d -o lga -g lga -m 0700 /home/lga/.ssh
+install -o lga -g lga -m 0600 "$mountpoint/authorized_keys" /home/lga/.ssh/authorized_keys
+touch /run/lga-provisioned

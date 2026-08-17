@@ -1,0 +1,37 @@
+; Linux Game Attestation EAT Profile 0.1
+; Early draft. Private-use labels are not stable interoperability assignments.
+
+lga-eat-claims = {
+  1 => non-empty-tstr,                 ; iss
+  ? 2 => non-empty-tstr,               ; pairwise sub
+  3 => non-empty-tstr,                 ; aud
+  4 => uint,                           ; exp, exclusive
+  6 => uint,                           ; iat
+  7 => bstr .size (16..32),            ; cti
+  8 => lga-confirmation,               ; cnf
+  10 => bstr .size 32,                 ; EAT nonce
+  265 => lga-profile-uri,              ; EAT profile
+  -70000 => lga-private-claims,
+  * int => any
+}
+
+lga-confirmation = {
+  5 => bstr .size 32                   ; RFC 9679 COSE Key thumbprint
+}
+
+lga-private-claims = {
+  1 => bstr .size (16..32),            ; challenge ID
+  2 => non-empty-tstr,                 ; application ID
+  3 => bstr .size (16..64),            ; session ID
+  4 => non-empty-tstr,                 ; policy ID
+  5 => uint,                           ; policy version
+  6 => bstr .size 32,                  ; SHA-256 policy digest
+  7 => bstr .size 32,                  ; SHA-256 workload manifest digest
+  8 => 0..3,                           ; assurance level
+  9 => uint                            ; revocation epoch
+}
+
+lga-profile-uri =
+  "https://github.com/5p00kyy/linux-game-attestation/profile/0.1"
+
+non-empty-tstr = tstr .size (1..256)

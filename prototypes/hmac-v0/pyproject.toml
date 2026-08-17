@@ -1,0 +1,12 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "lga-hmac-v0"
+version = "0.0.1"
+description = "Frozen HMAC mechanics prototype for Linux Game Attestation"
+requires-python = ">=3.11"
+
+[tool.setuptools.packages.find]
+where = ["src"]
